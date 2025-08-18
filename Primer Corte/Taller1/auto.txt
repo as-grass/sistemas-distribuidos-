@@ -1,0 +1,28 @@
+#!/usr/bin/perl
+#**************************************************************
+#         		Pontificia Universidad Javeriana
+#     Autor: Ana Sofía Grass Giraldo
+#     Fecha: Agosto 2025
+#     Materia: Sistemas Distribuidos
+#     Fichero: script automatización ejecución por lotes 
+#****************************************************************/
+
+$Path = `pwd`;
+chomp($Path);
+$Path_Datos = "/Users/juanbaplo/Desktop/grass/archivos_dat";
+
+$Nombre_Ejecutable = "mmClasicaOpenMP";
+@Size_Matriz = ("80","120","160","200","240","280","320","360","400","440","480","520");
+@Num_Hilos = (1,2,4,8,16,20);
+$Repeticiones = 30;
+
+foreach $size (@Size_Matriz){
+	foreach $hilo (@Num_Hilos) {
+		$file = "$Path_Datos/$Nombre_Ejecutable-".$size."-Hilos-".$hilo.".dat";
+		for ($i=0; $i<$Repeticiones; $i++) {
+			system("$Path/$Nombre_Ejecutable $size $hilo  1>> $file 2>/dev/null");
+#			printf("$Path/$Nombre_Ejecutable $size $hilo \n");
+		}
+		$p=$p+1;
+	}
+}
