@@ -1,4 +1,4 @@
-GCC = gcc-15
+GCC = gcc
 CFLAGS = -lm
 FOPENMP = -fopenmp -O3
 POSIX = -lpthread
@@ -14,4 +14,4 @@ mmClasicaOpenMP: mmClasicaOpenMP.c
 	$(GCC) $(CFLAGS) $@.c -o $@ $(FOPENMP)
 
 clean:
-	$(RM) $(PROGRAMAS) 
+	del /Q $(PROGRAMAS)
