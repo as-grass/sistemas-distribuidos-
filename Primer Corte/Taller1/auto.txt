@@ -9,22 +9,49 @@
 #     con diferentes tamaños y números de hilos OpenMP
 #****************************************************************/
 
-$Path = `pwd`;
+$Path = ".";
 chomp($Path);
 $Path_Datos = "$Path/archivos_dat";
 
+# Crear carpeta de salida si no existe
+mkdir($Path_Datos) unless -d $Path_Datos;
+
 # Configuración del experimento
 $Nombre_Ejecutable = "mmClasicaOpenMP";
-@Size_Matriz = ("1000","2000","3000","4000","5000","6000","7000","8000","9000","10000","11000","13000");
+$Bin = "$Nombre_Ejecutable.exe";
+@Size_Matriz = ("1040","2000","3040","4000","5040","6000","7040","8000","9040","10000","11040","13040");
 @Num_Hilos = (1,4,8,16,20);
 $Repeticiones = 30;
+
+# Validación: asegurar que cada tamaño es divisible por TODOS los hilos
+@Valid_Sizes = ();
+foreach $size (@Size_Matriz){
+	$ok = 1;
+	foreach $h (@Num_Hilos){
+		if($size % $h != 0){ $ok = 0; last; }
+	}
+	if($ok){
+		push @Valid_Sizes, $size;
+	}else{
+		@no = ();
+		foreach $h (@Num_Hilos){ if($size % $h != 0){ push @no, $h; } }
+		$lista_no = join(",", @no);
+		print "Aviso: tamaño $size no es divisible por todos los hilos ($lista_no). Se omite.\n";
+	}
+}
+if(scalar(@Valid_Sizes) == 0){
+	print "No hay tamaños válidos tras la validación. Fin.\n";
+	exit(1);
+}
+@Size_Matriz = @Valid_Sizes;
+print "Tamaños válidos: ".join(",", @Size_Matriz)."\n";
 
 # Ejecutar pruebas para cada combinación de tamaño y hilos
 foreach $size (@Size_Matriz){
 	foreach $hilo (@Num_Hilos) {
 		$file = "$Path_Datos/$Nombre_Ejecutable-".$size."-Hilos-".$hilo.".dat";
 		for ($i=0; $i<$Repeticiones; $i++) {
-			system("$Path/$Nombre_Ejecutable $size $hilo  1>> $file 2>/dev/null");
+			system("$Path/$Bin $size $hilo  1>> $file 2> NUL");
 #			printf("$Path/$Nombre_Ejecutable $size $hilo \n");
 		}
 		$p=$p+1;
