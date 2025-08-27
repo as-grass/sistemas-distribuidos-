@@ -4,18 +4,22 @@
 #     Autor: Ana Sofía Grass Giraldo
 #     Fecha: Agosto 2025
 #     Materia: Sistemas Distribuidos
-#     Fichero: script automatización ejecución por lotes 
+#     Fichero: script automatización plan de pruebas
+#     Descripción: Ejecuta pruebas de carga para multiplicación de matrices
+#     con diferentes tamaños y números de hilos OpenMP
 #****************************************************************/
 
 $Path = `pwd`;
 chomp($Path);
-$Path_Datos = "/Users/juanbaplo/Desktop/grass/archivos_dat";
+$Path_Datos = "$Path/archivos_dat";
 
+# Configuración del experimento
 $Nombre_Ejecutable = "mmClasicaOpenMP";
-@Size_Matriz = ("80","120","160","200","240","280","320","360","400","440","480","520");
-@Num_Hilos = (1,2,4,8,16,20);
+@Size_Matriz = ("1000","2000","3000","4000","5000","6000","7000","8000","9000","10000","11000","13000");
+@Num_Hilos = (1,4,8,16,20);
 $Repeticiones = 30;
 
+# Ejecutar pruebas para cada combinación de tamaño y hilos
 foreach $size (@Size_Matriz){
 	foreach $hilo (@Num_Hilos) {
 		$file = "$Path_Datos/$Nombre_Ejecutable-".$size."-Hilos-".$hilo.".dat";

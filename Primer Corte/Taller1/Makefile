@@ -1,17 +1,25 @@
+# Compilador
 GCC = gcc
-CFLAGS = -lm
+
+# Flags de compilación
+CFLAGS = -Wall -std=c99
 FOPENMP = -fopenmp -O3
-POSIX = -lpthread
+LIBS = -lm
 
-modulo = inter.c
+# Nombre del programa
+PROGRAM = mmClasicaOpenMP
 
-PROGRAMAS = mmClasicaOpenMP 
+# Compilar el programa
+all: $(PROGRAM)
 
-ALL: $(PROGRAMAS)
+# Regla para compilar
+$(PROGRAM): $(PROGRAM).c
+	$(GCC) $(CFLAGS) $(FOPENMP) $< -o $@ $(LIBS)
 
-
-mmClasicaOpenMP: mmClasicaOpenMP.c
-	$(GCC) $(CFLAGS) $@.c -o $@ $(FOPENMP)
-
+# Limpiar archivos compilados
 clean:
-	del /Q $(PROGRAMAS)
+ifeq ($(OS),Windows_NT)
+	del /Q $(PROGRAM).exe 2>nul || echo "No hay archivos para eliminar"
+else
+	rm -f $(PROGRAM)
+endif
