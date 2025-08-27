@@ -87,7 +87,7 @@ for my $size (keys %data) {
   }
 }
 
-open my $out, ">", "$path/summary.csv" or die "No se pudo crear summary.csv\n";
+open my $out, ">", "$path/estadisticas.csv" or die "No se pudo crear estadisticas.csv\n";
 print $out "size,threads,n_raw,n,mean_us,std_us,cv,median_us,p90_us,min_us,max_us,ci95_low_us,ci95_high_us,speedup,efficiency,gflops\n";
 
 for my $size (sort { $a <=> $b } keys %data) {
@@ -120,4 +120,4 @@ for my $size (sort { $a <=> $b } keys %data) {
   }
 }
 close $out;
-print "Resumen escrito en summary.csv\n";
+print "Resumen escrito en estadisticas.csv\n";
