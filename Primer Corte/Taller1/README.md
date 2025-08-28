@@ -69,18 +69,12 @@ mmClasicaOpenMP-9040-Hilos-8.dat,9040,8,12,923147749.166667,11270596.178689
 - En tamaños pequeños, el overhead de paralelizar puede atenuar o revertir beneficios.
 
 ## Conclusiones
-- Los tiempos medios decrecen consistentemente al aumentar hilos; la mejor media suele darse con 20 hilos para cada tamaño 
-- La escalabilidad es sublineal: de 16 a 20 hilos las mejoras existen pero son menores, lo que evidencia sobrecostes de sincronización y límites de memoria.
-- La variabilidad crece en configuraciones con más hilos y tamaños intermedios (desviaciones estándar más altas), aunque hay casos muy estables (p. ej., 5040-4 hilos con baja desviación comparada con 16/20).
-- Aparece un resultado atípico en 3040-20 hilos (media ≈9.86e6 µs y baja desviación respecto a otros hilos del mismo tamaño), lo que sugiere una interacción favorable de caché/afinidad o la necesidad de confirmar el entorno de prueba.
-- En tamaños pequeños, el overhead de paralelizar puede limitar o revertir la ganancia; en tamaños grandes, el paralelismo aporta mejoras claras pero con rendimientos decrecientes.
-- En 10000, se observa 8→16→20 hilos con medias ≈1.203e9→6.037e8→4.963e8 µs, mostrando mejoras fuertes hasta 16 y ganancias adicionales moderadas hacia 20.
-- En 8000, el patrón es similar (≈5.997e8→3.125e8→2.574e8 µs), confirmando rendimientos decrecientes tras 16 hilos.
-- En 6000, el descenso es marcado desde 1 hilo (≈2.106e9 µs) hasta 20 hilos (≈1.005e8 µs), con desviaciones estándar bajas en 16–20 hilos, indicando ejecución estable a alta paralelización.
-- En 5040, 16–20 hilos presentan desviaciones muy altas (≈1.53e8 y ≈1.46e8 µs), mientras 4 hilos es notablemente más estable (≈8.52e5 µs), evidenciando contención o efectos de memoria a mayor paralelismo.
-- En 4000, 16–20 hilos tienen medias similares (≈1.76e8 y ≈1.75e8 µs) y desviaciones altas, lo que sugiere un cuello de botella compartido (memoria/caché) que limita más escalado.
-- Globalmente, 20 hilos da la mejor media en casi todos los tamaños; 8 hilos ya aporta reducciones significativas respecto a 1/4 hilos.
-- La variabilidad relativa tiende a disminuir en tamaños muy grandes cuando cada hilo tiene suficiente trabajo, siempre que no haya contención severa de memoria.
+- Aumentar la cantidad de hilos reduce el tiempo de ejecución en la mayoría de los casos.
+- Los beneficios no crecen de forma proporcional: a partir de cierto punto, añadir más hilos aporta mejoras cada vez menores.
+- Parte de esa limitación se debe a sincronización y a competencia por memoria/caché compartida.
+- La variabilidad entre repeticiones suele ser mayor con más hilos y en tamaños intermedios; hay configuraciones que se comportan de manera estable.
+- Pueden aparecer resultados atípicos; conviene repetir esas configuraciones para confirmar su comportamiento.
+- En tamaños pequeños, el overhead de paralelizar puede anular la ganancia; en tamaños grandes, el paralelismo sí aporta mejoras claras.
 
 
 
