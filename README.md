@@ -1,4 +1,22 @@
-## 🚀 Taller 1 — Multiplicación de Matrices con OpenMP (Sistemas Distribuidos)
+## 🧩 Pontificia Universidad Javeriana — Sistemas Distribuidos
+
+Bienvenid@ a la materia donde varios cerebros (y núcleos) piensan mejor que uno. Aquí desarmamos sistemas en piezas que corren en paralelo o en distintos nodos, y los volvemos a armar con comunicación, sincronización y mucha evidencia experimental. ✨
+
+### 🎯 ¿De qué va el curso?
+- Concurrencia y paralelismo: procesos, hilos, regiones críticas, exclusión mutua, barreras.
+- Computación paralela en un nodo (OpenMP) y entre nodos (RMI/MPI/sockets).
+- Consistencia y tolerancia a fallos (el mundo real falla, aceptémoslo con estilo).
+- Medición y sustentación: métricas, IC95%, speedup, eficiencia y reproducibilidad.
+
+### 🧪 Lo que encontrarás en este repo
+- Talleres/labs con código, scripts y reportes reproducibles.
+- Cada taller incluye: cómo compilar/ejecutar, plan de pruebas y un CSV con resultados.
+
+Si vienes por el primer reto de paralelismo, sigue leyendo. Si no, curiosea las carpetas por corte y diviértete rompiendo límites de performance. 🚀
+
+---
+
+## 🚀 Taller 1 — Multiplicación de Matrices con OpenMP
 
 Bienvenid@ al laboratorio de paralelismo: multiplicación clásica de matrices (O(N^3)) con OpenMP, plan de pruebas de carga y un pipeline de análisis estadístico para que tus resultados sobrevivan al ruido del SO. 😎
 
@@ -22,7 +40,6 @@ Primer Corte/
 ### 🧰 Requisitos (Ubuntu)
 - Ubuntu 20.04/22.04+ con bash/zsh
 - GCC con OpenMP (`sudo apt install -y build-essential`)
-- Perl (suele venir instalado; si no: `sudo apt install -y perl`)
 - Python 3 + matplotlib (`sudo apt install -y python3-matplotlib`) o `pip install matplotlib`
 
 ### 🛠️ Compilación
