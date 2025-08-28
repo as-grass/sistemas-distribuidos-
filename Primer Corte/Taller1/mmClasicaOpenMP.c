@@ -13,13 +13,15 @@
 #include <sys/time.h>
 #include <omp.h>
 
-struct timeval inicio, fin; 
+struct timeval inicio, fin; // variables para medir tiempo
 
 void InicioMuestra(){
+	/* marca inicio (microsegundos) */
 	gettimeofday(&inicio, (void *)0);
 }
 
 void FinMuestra(int N, int TH){
+	/* marca fin y reporta duración en microsegundos */
 	gettimeofday(&fin, (void *)0);
 	long tiempo_usec = (fin.tv_sec - inicio.tv_sec) * 1000000 + (fin.tv_usec - inicio.tv_usec);
 	double tiempo = (double) tiempo_usec;
@@ -45,6 +47,7 @@ void iniMatrix(double *m1, double *m2, int D){
 }
 
 void multiMatrix(double *mA, double *mB, double *mC, int D){
+	/* algoritmo clásico i-j-k; paraleliza i y j */
 	#pragma omp parallel for collapse(2)
 	for(int i=0; i<D; i++){
 		for(int j=0; j<D; j++){

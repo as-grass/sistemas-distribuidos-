@@ -13,14 +13,20 @@ $Path = ".";
 chomp($Path);
 $Path_Datos = "$Path/archivos_dat";
 
+# Ruta base y carpeta donde se guardarán los .dat
+
 # Crear carpeta de salida si no existe
 mkdir($Path_Datos) unless -d $Path_Datos;
 
 # Configuración del experimento
+# Nombre del programa (binario)
 $Nombre_Ejecutable = "mmClasicaOpenMP";
 $Bin = "$Nombre_Ejecutable.exe";
+# 12 tamaños de matriz (múltiplos de 80)
 @Size_Matriz = ("1040","2000","3040","4000","5040","6000","7040","8000","9040","10000","11040","13040");
+# Hilos de OpenMP a probar
 @Num_Hilos = (1,4,8,16,20);
+# Repeticiones por combinación (tamaño, hilos)
 $Repeticiones = 30;
 
 # Validación: asegurar que cada tamaño es divisible por TODOS los hilos
@@ -47,10 +53,14 @@ if(scalar(@Valid_Sizes) == 0){
 print "Tamaños válidos: ".join(",", @Size_Matriz)."\n";
 
 # Ejecutar pruebas para cada combinación de tamaño y hilos
+# Recorre cada tamaño de matriz
 foreach $size (@Size_Matriz){
+	# Recorre cada cantidad de hilos
 	foreach $hilo (@Num_Hilos) {
+		# Archivo de salida para (tamaño,hilos)
 		$file = "$Path_Datos/$Nombre_Ejecutable-".$size."-Hilos-".$hilo.".dat";
 		for ($i=0; $i<$Repeticiones; $i++) {
+			# Ejecuta el binario y añade la línea con el tiempo (stderr silenciado)
 			system("$Path/$Bin $size $hilo  1>> $file 2> NUL");
 #			printf("$Path/$Nombre_Ejecutable $size $hilo \n");
 		}

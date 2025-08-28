@@ -1,4 +1,4 @@
-tamano_matriz=6000; hilos=1; tiempo_microsegundos=2105123987
+﻿tamano_matriz=6000; hilos=1; tiempo_microsegundos=2105123987
 tamano_matriz=6000; hilos=1; tiempo_microsegundos=2098876543
 tamano_matriz=6000; hilos=1; tiempo_microsegundos=2111032456
 tamano_matriz=6000; hilos=1; tiempo_microsegundos=2107754312
@@ -10,22 +10,3 @@ tamano_matriz=6000; hilos=1; tiempo_microsegundos=2097654321
 tamano_matriz=6000; hilos=1; tiempo_microsegundos=2112245789
 tamano_matriz=6000; hilos=1; tiempo_microsegundos=2101145789
 tamano_matriz=6000; hilos=1; tiempo_microsegundos=2107789345
-tamano_matriz=6000; hilos=1; tiempo_microsegundos=2099987654
-tamano_matriz=6000; hilos=1; tiempo_microsegundos=2110023456
-tamano_matriz=6000; hilos=1; tiempo_microsegundos=2106654987
-tamano_matriz=6000; hilos=1; tiempo_microsegundos=2102349876
-tamano_matriz=6000; hilos=1; tiempo_microsegundos=2098877890
-tamano_matriz=6000; hilos=1; tiempo_microsegundos=2113456789
-tamano_matriz=6000; hilos=1; tiempo_microsegundos=2105567890
-tamano_matriz=6000; hilos=1; tiempo_microsegundos=2108890123
-tamano_matriz=6000; hilos=1; tiempo_microsegundos=2097765432
-tamano_matriz=6000; hilos=1; tiempo_microsegundos=2109987123
-tamano_matriz=6000; hilos=1; tiempo_microsegundos=2112234987
-tamano_matriz=6000; hilos=1; tiempo_microsegundos=2103345678
-tamano_matriz=6000; hilos=1; tiempo_microsegundos=2106678901
-tamano_matriz=6000; hilos=1; tiempo_microsegundos=2099983345
-tamano_matriz=6000; hilos=1; tiempo_microsegundos=2104456789
-tamano_matriz=6000; hilos=1; tiempo_microsegundos=2111123456
-tamano_matriz=6000; hilos=1; tiempo_microsegundos=2102234567
-tamano_matriz=6000; hilos=1; tiempo_microsegundos=2108898765
-

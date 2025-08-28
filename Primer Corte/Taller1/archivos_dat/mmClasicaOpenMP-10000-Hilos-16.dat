@@ -10,6 +10,3 @@ tamano_matriz=10000; hilos=16; tiempo_microsegundos=606084025
 tamano_matriz=10000; hilos=16; tiempo_microsegundos=596621374
 tamano_matriz=10000; hilos=16; tiempo_microsegundos=599056043
 tamano_matriz=10000; hilos=16; tiempo_microsegundos=606222462
-tamano_matriz=10000; hilos=16; tiempo_microsegundos=589611740
-tamano_matriz=10000; hilos=16; tiempo_microsegundos=601473102
-tamano_matriz=10000; hilos=16; tiempo_microsegundos=587330628
