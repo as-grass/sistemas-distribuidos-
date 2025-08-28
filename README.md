@@ -1,113 +1,51 @@
 ## 🧩 Pontificia Universidad Javeriana — Sistemas Distribuidos
 
-Bienvenid@ a la materia donde varios cerebros (y núcleos) piensan mejor que uno. Aquí desarmamos sistemas en piezas que corren en paralelo o en distintos nodos, y los volvemos a armar con comunicación, sincronización y mucha evidencia experimental. ✨
+Bienvenid@: en esta asignatura estudiamos cómo diseñar, construir y evaluar sistemas que operan sobre múltiples procesos y nodos, manteniendo la coherencia, el desempeño y la resiliencia ante fallos. La meta: ofrecer servicios confiables a escala, como si un conjunto de máquinas fuese una sola. ✨
 
-### 🎯 ¿De qué va el curso?
-- Concurrencia y paralelismo: procesos, hilos, regiones críticas, exclusión mutua, barreras.
-- Computación paralela en un nodo (OpenMP) y entre nodos (RMI/MPI/sockets).
-- Consistencia y tolerancia a fallos (el mundo real falla, aceptémoslo con estilo).
-- Medición y sustentación: métricas, IC95%, speedup, eficiencia y reproducibilidad.
+### 🧠 ¿Qué es un sistema distribuido?
+Un conjunto de computadores (o procesos) independientes que se presentan al usuario como un sistema único y coherente. Implica retos de comunicación, sincronización, tiempo, consistencia y fallos que no aparecen (o aparecen distinto) en sistemas centralizados. 🌐
 
-### 🧪 Lo que encontrarás en este repo
-- Talleres/labs con código, scripts y reportes reproducibles.
-- Cada taller incluye: cómo compilar/ejecutar, plan de pruebas y un CSV con resultados.
+### 🎯 Objetivos de aprendizaje
+- Comprender modelos de concurrencia y comunicación entre procesos y nodos.
+- Analizar y diseñar protocolos con propiedades de seguridad y vivacidad.
+- Evaluar desempeño y escalabilidad con métricas rigurosas (speedup, eficiencia, IC95%).
+- Aplicar técnicas de replicación y tolerancia a fallos para alta disponibilidad.
+- Promover reproducibilidad, trazabilidad y buenas prácticas de ingeniería. ✅
 
-Si vienes por el primer reto de paralelismo, sigue leyendo. Si no, curiosea las carpetas por corte y diviértete rompiendo límites de performance. 🚀
+### 📚 Temas principales
+- Concurrencia y sincronización: procesos, hilos, regiones críticas, bloqueos, barreras.
+- Comunicación: paso de mensajes, RPC, RMI, MPI, sockets; patrones request/reply y pub/sub.
+- Tiempo y orden: relojes lógicos (Lamport, vectoriales), causalidad y total order.
+- Consistencia: modelos (estricta, linealizable, causal, eventual) y su trade-off.
+- Replicación y consenso: quorum, primario/secundario, Paxos/Raft (nociones), leader election.
+- Particionado y escalado: partición de datos, sharding, balanceo de carga.
+- Tolerancia a fallos: detección, reintentos, timeouts, idempotencia, circuit breakers.
+- Observabilidad: métricas, logs estructurados, trazas distribuidas.
+- Desempeño: Amdahl/Gustafson, speedup, eficiencia, throughput/latencia; diseño de experimentos.
 
----
+### 🛠️ Metodología y herramientas
+- Enfoque práctico guiado por teoría: leer, diseñar, implementar y medir. 🔬
+- Lenguajes y frameworks ilustrativos (según unidad): C/C++ (paralelismo), Java (RPC/RMI), MPI, sockets.
+- Automatización de pruebas y recolección de evidencia empírica.
+- Control de versiones y documentación reproducible.
 
-## 🚀 Taller 1 — Multiplicación de Matrices con OpenMP
+### 📏 Evaluación y ética
+- Énfasis en claridad técnica, corrección funcional y sustento experimental.
+- Integridad académica: trabajo propio, citas adecuadas y transparencia en los resultados. 🤝
 
-Bienvenid@ al laboratorio de paralelismo: multiplicación clásica de matrices (O(N^3)) con OpenMP, plan de pruebas de carga y un pipeline de análisis estadístico para que tus resultados sobrevivan al ruido del SO. 😎
+### ♻️ Reproducibilidad y buenas prácticas
+- Código claro, modular y documentado.
+- Experimentos parametrizables y repetibles; scripts de ejecución y análisis.
+- Reportes breves con metodología, resultados y conclusiones accionables.
 
-### TL;DR (3 pasos y a volar)
-1) Compila y prueba: `gcc ... && ./mmClasicaOpenMP 200 2`
-2) Ejecuta el plan: `perl ./auto.txt` (genera `.dat`)
-3) Resume: usa `estadisticas.csv` (ya generado) y revisa `INFORME.md`
+### 📖 Recursos recomendados
+- Tanenbaum & van Steen — Modern Operating Systems / Distributed Systems. 📘
+- Coulouris — Distributed Systems: Concepts and Design. 📗
+- Papers clásicos: Lamport (Time, Clocks…), Brewer (CAP), Vogels (Eventual Consistency).
 
-### 🗂️ Estructura
-```
-Primer Corte/
-  Taller1/
-    mmClasicaOpenMP.c        # Algoritmo MM con OpenMP
-    Makefile                 # Compilación automatizada (GCC + OpenMP)
-    auto.txt                 # Script (Perl) que ejecuta el plan de pruebas y genera .dat
-    INFORME.md               # Metodología y sustento estadístico
-    archivos_dat/            # Salida de datos crudos (.dat)
-    estadisticas.csv         # Resumen estadístico (si ya fue generado)
-```
+### 🚀 Cómo empezar
+- Clona el repositorio, instala dependencias indicadas por cada unidad y ejecuta los ejemplos.
+- Sigue las instrucciones de compilación/ejecución incluidas en cada carpeta de contenido.
+- Revisa los scripts de automatización y los reportes para entender la metodología.
 
-### 🧰 Requisitos (Ubuntu)
-- Ubuntu 20.04/22.04+ con bash/zsh
-- GCC con OpenMP (`sudo apt install -y build-essential`)
-- Python 3 + matplotlib (`sudo apt install -y python3-matplotlib`) o `pip install matplotlib`
-
-### 🛠️ Compilación
-```bash
-cd "Primer Corte/Taller1"
-gcc -Wall -std=c99 -fopenmp -O3 mmClasicaOpenMP.c -o mmClasicaOpenMP -lm
-# Prueba mínima
-./mmClasicaOpenMP 200 2
-```
-
-También puedes usar Makefile:
-```bash
-cd "Primer Corte/Taller1"
-make
-```
-
-### 🧪 Plan de pruebas (12 tamaños × hilos {1,4,8,16,20})
-Los tamaños están configurados como múltiplos de 80 para ser divisibles por todos los hilos.
-
-🔇 Sugerencias anti-ruido (opcional):
-```bash
-export OMP_PROC_BIND=TRUE
-export OMP_DYNAMIC=FALSE
-export OMP_PLACES=cores
-```
-
-Ejecuta el plan (genera `./archivos_dat/mmClasicaOpenMP-<N>-Hilos-<T>.dat`):
-```bash
-perl ./auto.txt
-```
-
-### 📊 Resumen estadístico (CSV)
-`estadisticas.csv` contiene media, desviación estándar, CV, mediana, p90, min/max, IC95%, speedup, eficiencia y GFLOPS por (N,T).
-Consulta:
-```bash
-head -n 10 ./Primer\ Corte/Taller1/estadisticas.csv
-```
-
-### 📈 Gráficas
-Opcional: si deseas gráficas, puedes generar las tuyas a partir de `estadisticas.csv` en el entorno que prefieras (p. ej., Python/Excel).
-
-### 🎛️ Personalización
-- En Linux, el ejecutable no tiene extensión: si es necesario, en `auto.txt` ajusta la variable para usar el binario sin `.exe`:
-  - `$Bin = "mmClasicaOpenMP";` (en lugar de `mmClasicaOpenMP.exe`).
-- Edita `auto.txt` para cambiar `@Size_Matriz` (mantener múltiplos de 80) o `$Repeticiones`.
-- Para validación rápida: usar pocas repeticiones (p. ej., 5–10) y menos tamaños; luego volver a 30/12.
-
-### 🧠 Sustento estadístico (resumen)
-- Control de entorno: OMP fijas, plan de energía Alto rendimiento.
-- Repeticiones por combinación: 30 (o hasta que IC95% relativo ≤ 10% y CV ≤ 10%).
-- IQR para atenuar outliers antes de estimar estadísticas.
-- Speedup/eficiencia respecto a 1 hilo por cada N.
-
-### 📦 Entrega comprimida (ejemplo)
-```bash
-cd "Primer Corte/Taller1"
-tar -czf ../entrega_taller_paralelismo.tar.gz \
-  mmClasicaOpenMP.c Makefile auto.txt INFORME.md \
-  estadisticas.csv archivos_dat
-```
-
-### 🩹 Solución de problemas
-- «command not found: gcc»: `sudo apt install -y build-essential`
-- «gcc: error: unrecognized command line option '-fopenmp'»: usa GCC (no Clang) o instala soporte OpenMP para tu compilador.
-- «No aparecen .dat»: verifica que estás en `Primer Corte/Taller1` y que `auto.txt` apunta al binario correcto (`mmClasicaOpenMP`).
-
-### 💡 Notas
-- El tiempo crece ~O(N^3) y la memoria ~O(N^2). Ajusta tamaños según tus recursos.
-- Los resultados pueden variar por interferencia del SO; aplica las sugerencias anti‑ruido para mayor estabilidad.
-
-
+— Bienvenid@ a pensar en grande, medir mejor y construir sistemas que no se caen. 💪✨
