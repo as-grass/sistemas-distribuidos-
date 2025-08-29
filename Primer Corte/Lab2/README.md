@@ -17,7 +17,7 @@ Este laboratorio implementa un servidor TCP multihilo y un cliente TCP. Cada con
 
 ### Compilacion
 ```powershell
-cd "C:\Users\anaso\OneDrive\Escritorio\sistemas-distribuidos-\Primer Corte\Lab2\lab02_clienteServidor"
+cd "C:\\Users\\anaso\\OneDrive\\Escritorio\\sistemas-distribuidos-\\Primer Corte\\Lab2\\lab02_clienteServidor"
 javac *.java
 ```
 
@@ -39,12 +39,12 @@ java TCPClient
 ### Desde la raiz del repo (usando classpath)
 ```powershell
 # Servidor
-cd "C:\Users\anaso\OneDrive\Escritorio\sistemas-distribuidos-"
-javac ".\Primer Corte\Lab2\lab02_clienteServidor\*.java"
-java -cp ".\Primer Corte\Lab2\lab02_clienteServidor" MultithreadedSocketServer
+cd "C:\\Users\\anaso\\OneDrive\\Escritorio\\sistemas-distribuidos-"
+javac ".\\Primer Corte\\Lab2\\lab02_clienteServidor\\*.java"
+java -cp ".\\Primer Corte\\Lab2\\lab02_clienteServidor" MultithreadedSocketServer
 
 # Cliente
-java -cp ".\Primer Corte\Lab2\lab02_clienteServidor" TCPClient
+java -cp ".\\Primer Corte\\Lab2\\lab02_clienteServidor" TCPClient
 ```
 
 ### Solucion de problemas
@@ -56,4 +56,4 @@ java -cp ".\Primer Corte\Lab2\lab02_clienteServidor" TCPClient
 ### Creditos
 Desarrollado por Sofia Grass para la asignatura de Introduccion a los Sistemas Distribuidos, Universidad Pontificia Javeriana.
 
-
+ 
