@@ -1,3 +1,11 @@
+/*
+ Universidad Pontificia Javeriana
+ Autora: Sofia Grass
+ Fecha: 29/08/2025
+ Archivo: TCPClient.java
+ Descripción: Cliente TCP interactivo que envía números al servidor y
+              muestra la respuesta recibida.
+*/
 import java.net.*;
 import java.io.*;
 public class TCPClient {

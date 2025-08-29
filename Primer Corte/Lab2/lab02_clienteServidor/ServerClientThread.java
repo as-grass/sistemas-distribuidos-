@@ -1,4 +1,12 @@
 
+/*
+ Universidad Pontificia Javeriana
+ Autora: Sofia Grass
+ Fecha: 29/08/2025
+ Archivo: ServerClientThread.java
+ Descripción: Hilo de atención por cliente. Lee un número del cliente y
+              responde con su cuadrado.
+*/
 import java.net.*;
 import java.io.*;
 

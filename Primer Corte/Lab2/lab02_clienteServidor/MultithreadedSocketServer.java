@@ -1,4 +1,12 @@
 
+/*
+ Universidad Pontificia Javeriana
+ Autora: Sofia Grass
+ Fecha: 29/08/2025
+ Archivo: MultithreadedSocketServer.java
+ Descripción: Servidor de sockets multihilo que atiende clientes TCP
+              creando un hilo por conexión (ServerClientThread).
+*/
 import java.net.*;
 
 public class MultithreadedSocketServer {
