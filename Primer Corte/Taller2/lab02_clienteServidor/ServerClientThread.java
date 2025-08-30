@@ -25,13 +25,21 @@ public class ServerClientThread extends Thread {
       //Variables para almacenar los mensajes tanto del cliente como del servidor
       String clientMessage="", serverMessage="";
       //Bucle que permanece activo para recibir y enviar mensajes, hasta que el cliente envie un mensaje "bye"
-      while(!clientMessage.equals("bye")){
+      while(true){
         //Lee el mensaje enviado por el cliente
         clientMessage=inStream.readUTF();
+        if ("bye".equalsIgnoreCase(clientMessage)) {
+          break;
+        }
         System.out.println("From Client-" +clientNo+ ": Number is :"+clientMessage);
-        //Calcula el cuadrado del número recibido
-        squre = Integer.parseInt(clientMessage) * Integer.parseInt(clientMessage);
-        serverMessage="From Server to Client-" + clientNo + " Square of " + clientMessage + " is " +squre;
+        //Calcula el cuadrado del número recibido con validación de entrada
+        try {
+          int number = Integer.parseInt(clientMessage);
+          squre = number * number;
+          serverMessage="From Server to Client-" + clientNo + " Square of " + clientMessage + " is " +squre;
+        } catch (NumberFormatException nfe) {
+          serverMessage = "From Server to Client-" + clientNo + " Error: entrada no numérica";
+        }
         //Envia el mensaje de respuesta para el cliente
         outStream.writeUTF(serverMessage);
         //Asegura que el mensaje sea enviado de inmediato

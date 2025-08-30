@@ -9,14 +9,14 @@ public class TCPClient {
     BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
     String clientMessage="",serverMessage="";
     while(!clientMessage.equals("bye")){
-      System.out.println("Enter number :");
+      System.out.println("Enter number (or 'bye' to exit):");
       clientMessage=br.readLine();
       outStream.writeUTF(clientMessage);
       outStream.flush();
       serverMessage=inStream.readUTF();
       System.out.println(serverMessage);
     }
-    outStream.close();
+    inStream.close();
     outStream.close();
     socket.close();
   }catch(Exception e){
