@@ -3,8 +3,6 @@ Taller 3
 Clase: Sistemas distribuidos
 Autores: Ana Sofía Grass, Sebastián Vargas, Sergio Ortiz, Isabela Palacio
 */
-package Taller3;
-
 
 public class CajeraThread extends Thread {
 
