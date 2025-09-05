@@ -7,15 +7,16 @@ import java.util.Scanner;
 //a través de un menú en consola.
 public class Cliente {
   public static void main(String[] args) {
-    //Host y puerto del servidor
+    // Argumentos: [0]=host (opcional) [1]=puerto (opcional) [2]=nombre servicio (opcional)
     String host = (args.length > 0) ? args[0] : "localhost";
     int port    = (args.length > 1) ? Integer.parseInt(args[1]) : 1099;
+    String nombre = (args.length > 2) ? args[2] : "BibliotecaService";
 
     try {
       //Obtener referencia al registro RMI
       Registry registry = LocateRegistry.getRegistry(host, port);
       // Buscar el servicio remoto por su nombre
-      BibliotecaRemote api = (BibliotecaRemote) registry.lookup("BibliotecaService");
+      BibliotecaRemote api = (BibliotecaRemote) registry.lookup(nombre);
 
       // Scanner para leer las opciones del usuario
       Scanner sc = new Scanner(System.in);

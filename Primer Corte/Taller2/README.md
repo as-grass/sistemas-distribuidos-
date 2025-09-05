@@ -76,13 +76,9 @@ javac *.java
 En la terminal del servidor:
 
 ```bash
-java -Djava.rmi.server.hostname=IP_DEL_SERVIDOR Servidor
-```
-
-Ejemplo (Mac con IP 192.168.5.131):
-
-```bash
-java -Djava.rmi.server.hostname=192.168.5.131 Servidor
+# Sintaxis: java Servidor [PUERTO] [HOSTNAME] [NOMBRE_SERVICIO]
+# Por defecto: PUERTO=1099, HOSTNAME=localhost, NOMBRE_SERVICIO=BibliotecaService
+java Servidor 1099 192.168.5.131 BibliotecaService
 ```
 
 El servidor imprime:
@@ -96,7 +92,8 @@ Servidor RMI listo en puerto 1099 con nombre: BibliotecaService
 En la terminal del cliente (Windows en este caso):
 
 ```powershell
-java Cliente 192.168.5.131 1099
+# Sintaxis: java Cliente [HOST] [PUERTO] [NOMBRE_SERVICIO]
+java Cliente 192.168.5.131 1099 BibliotecaService
 ```
 
 El cliente imprime las operaciones de prueba: consulta, préstamo, devolución.
@@ -145,7 +142,6 @@ El video muestra:
 
 ## LINK YOTUBE VIDEO 🎥
 
-https://youtu.be/L91R6vrasVE
-
+https://www.youtube.com/watch?v=pKW4iqJt7OY
 ---
 
