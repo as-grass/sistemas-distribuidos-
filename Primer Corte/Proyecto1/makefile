@@ -42,11 +42,11 @@ pipe:
 
 # Ejecutar receptor con argumentos (requiere pipe)
 run-receptor: pipe
-	./$(RECEPTOR_EXE) -p $(PIPE_NAME) -f BaseDatos.txt -s salida.txt -v
+	./$(RECEPTOR_EXE) -p $(PIPE_NAME) -f datos/BaseDatos.txt -s salida.txt -v
 
 # Ejecutar solicitante (requiere pipe)
 run-solicitante: pipe
-	./$(SOLICITANTE_EXE) -p $(PIPE_NAME)
+	./$(SOLICITANTE_EXE) -p $(PIPE_NAME) -i input/pruebasSolicitudes.txt
 
 # ----------------- LIMPIAR -----------------
 clean:

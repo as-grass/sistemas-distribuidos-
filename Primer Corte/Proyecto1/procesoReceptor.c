@@ -10,7 +10,7 @@ int verbose = 0;
 FILE* logFile = NULL;
 
 #define MAX_LIBROS 100
-#define MAX_EJEMPLARES 10
+#define MAX_EJEMPLARES 50
 #define TAM_BUFFER 10
 
 #define MAX_EVENTOS 1000
@@ -61,6 +61,9 @@ pthread_mutex_t mutex_solicitantes = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 sem_t hay_datos;
 sem_t hay_espacio;
+
+// Hacer total_libros accesible a los hilos
+int total_libros_global = 0;
 
 int cargarBaseDatos(const char* archivo, Libro* libros) {
   FILE* file = fopen(archivo, "r");
@@ -116,7 +119,7 @@ int main(int argc, char* argv[]) {
   char* pipeNombre = NULL;
   char* archivoDatos = NULL;
   char* archivoSalida = NULL;
-  int verbose = 0;
+  // usar el verbose global
 
   for (int i = 1; i < argc; i++) {
     if (strcmp(argv[i], "-p") == 0 && i + 1 < argc) {
@@ -167,6 +170,9 @@ int main(int argc, char* argv[]) {
     fprintf(stderr, "Error cargando la base de datos.\n");
     return EXIT_FAILURE;
   }
+
+  // Guardar total_libros para uso del consumidor
+  total_libros_global = total_libros;
 
   printf("\nLibros cargados:\n");
   for (int i = 0; i < total_libros; i++) {
@@ -335,11 +341,16 @@ void* hilo_consumidor(void* arg) {
     sem_post(&hay_espacio);
 
     // Procesar devolución o renovación
-    for (int i = 0; i < MAX_LIBROS; i++) {
+    for (int i = 0; i < total_libros_global; i++) {
       if (libros[i].isbn == s.isbn) {
         for (int j = 0; j < libros[i].cantidad; j++) {
           if (libros[i].ejemplares[j].estado == 'P') {
-            libros[i].ejemplares[j].estado = 'D';
+            // Si es devolución ('D'), marcar disponible; si es renovación ('R'), mantener prestado
+            if (s.tipo == 'D') {
+              libros[i].ejemplares[j].estado = 'D';
+            } else if (s.tipo == 'R') {
+              libros[i].ejemplares[j].estado = 'P';
+            }
             char fecha[20];
             obtenerFechaActual(fecha, sizeof(fecha));
             strcpy(libros[i].ejemplares[j].fecha, fecha);
